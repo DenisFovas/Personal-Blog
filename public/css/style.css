@@ -17,3 +17,8 @@ html {
     display: flex;
     justify-content: center;
 }
+
+#text-editor {
+    height: 600px;;
+
+}
