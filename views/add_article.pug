@@ -1,10 +1,11 @@
 extends layout
 
 block content
+    link(href="/css/editor.css")
     script(type='text/javascript', src="/js/editor.js")
     .container
         h1 #{title}
-        form(method="POST", action="/articles/add")
+        form(method="POST", action="/articles/add" onSubmit='doSubmit()')
             #form-group
                 label Title:
                 input.form-control(name='title', type=text)
@@ -80,5 +81,6 @@ block content
 
 
                 iframe.form-control#text-editor(name='editor')
+                textarea.hidden#textarea(name='body')
             br
             input.btn.btn-primary#submit-button(type="submit", value="submit")

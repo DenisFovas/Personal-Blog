@@ -6,17 +6,17 @@ var Article = require("../models/article");
 // Bring in the User model
 var User = require("../models/user");
 
-router.get("/add", ensureAuthenticated, function(req, res) {
+router.get("/add", ensureAuthenticated, function (req, res) {
   res.render("add_article", {
     title: "Articles"
   });
 });
 
 // Add submit post route
-router.post("/add", function(req, res) {
+router.post("/add", function (req, res) {
   // Data validation
   req.checkBody("title", "Title is required").notEmpty();
-  req.checkBody("body", "Body is required").notEmpty();
+  req.checkBody("editor", "Body is required").notEmpty();
   // Receive errors, if we have some during the validation
   var errors = req.validationErrors();
   if (errors) {
@@ -30,7 +30,7 @@ router.post("/add", function(req, res) {
     article.author = req.user._id;
     article.body = req.body.body;
 
-    article.save(function(err) {
+    article.save(function (err) {
       if (err) {
         console.log(err);
         return;
@@ -43,7 +43,7 @@ router.post("/add", function(req, res) {
 });
 
 // Submit post route for editding/update
-router.post("/edit/:id", function(req, res) {
+router.post("/edit/:id", function (req, res) {
   // Define an empty object and make it the new post
   var article = {};
   article.title = req.body.title;
@@ -56,7 +56,7 @@ router.post("/edit/:id", function(req, res) {
 
   // Update method will receive the query, the updated data, and the function for
   // the redirection
-  Article.update(query, article, function(err) {
+  Article.update(query, article, function (err) {
     if (err) {
       console.log(err);
       return;
@@ -67,8 +67,8 @@ router.post("/edit/:id", function(req, res) {
 });
 
 // Load specific article (update) || Edit form
-router.get("/edit/:id", ensureAuthenticated, function(req, res) {
-  Article.findById(req.params.id, function(err, article) {
+router.get("/edit/:id", ensureAuthenticated, function (req, res) {
+  Article.findById(req.params.id, function (err, article) {
     if (article.author != req.user._id) {
       req.flash("danger", "Not Authorized");
       res.redirect("/");
@@ -82,25 +82,25 @@ router.get("/edit/:id", ensureAuthenticated, function(req, res) {
 });
 
 // Delete Route for delete
-router.delete("/:id", function(req, res) {
+router.delete("/:id", function (req, res) {
   if (!req.user._id) {
     res.status(500).send();
   } else {
     var query = { _id: req.params.id };
-    Article.findById(query, function(err, article) {
+    Article.findById(query, function (err, article) {
       if (err) {
         console.log(err);
       } else {
         if (article.author != req.user._id) {
           res.status(500).send();
         } else {
-          Article.remove(query, function(err) {
+          Article.remove(query, function (err) {
             if (err) {
               console.log("error");
               console.log(err);
             } else {
-			//   res.send("Success on deletion");
-			  res.redirect("/");
+              //   res.send("Success on deletion");
+              res.redirect("/");
             }
           });
         }
@@ -110,9 +110,9 @@ router.delete("/:id", function(req, res) {
 });
 
 // Get single article
-router.get("/:id", function(req, res) {
-  Article.findById(req.params.id, function(err, article) {
-    User.findById(article.author, function(err, user) {
+router.get("/:id", function (req, res) {
+  Article.findById(req.params.id, function (err, article) {
+    User.findById(article.author, function (err, user) {
       res.render("article", {
         article: article,
         author: user.name
