@@ -1,6 +1,7 @@
 extends layout
 
 block content
+    script(type='text/javascript', src="/js/editor.js")
     .container
         h1 #{title}
         form(method="POST", action="/articles/add")
@@ -11,6 +12,73 @@ block content
             #form-group
                 label Content:
                 br
-                textarea.form-control#text-editor(name='body')
+                div.editor-bar.panel
+                    button(type="button", onclick="executeCommand('bold')")
+                        i.fa.fa-bold
+                    button(type="button", onclick="executeCommand('italic')")
+                        i.fa.fa-italic
+                    button(type="button", onclick="executeCommand('underline')")
+                        i.fa.fa-underline
+                    button(type="button", onclick="executeCommand('strikeThrough')")
+                        i.fa.fa-strikethrough
+                    button(type="button", onclick="executeCommand('justifyLeft')")
+                        i.fa.fa-align-left
+                    button(type="button", onclick="executeCommand('justifyCenter')")
+                        i.fa.fa-align-center
+                    button(type="button", onclick="executeCommand('justifyRight')")
+                        i.fa.fa-align-right
+                    button(type="button", onclick="executeCommand('justifyFull')")
+                        i.fa.fa-align-justify
+                    button(type="button", onclick="executeCommand('indent')")
+                        i.fa.fa-indent
+                    button(type="button", onclick="executeCommand('outdent')")
+                        i.fa.fa-dedent
+                    button(type="button", onclick="executeCommand('bold')")
+                        i.fa.fa-link
+                    button(type="button", onclick="executeCommand('subscript')")
+                        i.fa.fa-subscript
+                    button(type="button", onclick="executeCommand('superscript')")
+                        i.fa.fa-superscript
+                    button(type="button", onclick="executeCommand('insertUnorderedList')")
+                        i.fa.fa-list-ul
+                    button(type="button", onclick="executeCommand('insertOrdoredList')")
+                        i.fa.fa-list-ol
+                    //- Continue with the image adding.
+                    button(type="button", onclick="executeCommand('bold')")
+                        i.fa.fa-file-picture-o
+                    button(type="button", onclick="executeCommand('')")
+                        i.fa.fa-header
+                        select(onclick="executeCommandWithArguments('formatBlock', this.value);")
+                            option(value='h1') 
+                                h1 Header 1
+                            option(value='h2') 
+                                h2 Header 2
+                            option(value='h3') 
+                                h3 Header 3
+                            option(value='h4') 
+                                h4 Header 4
+                            option(value='h5') 
+                                h5 Header 5
+                            option(value='h6') 
+                                h6 Header 6
+                    button(type="button", onclick="executeCommand('')")
+                        i.fa.fa-code
+                    button(type="button", onclick="executeCommand('')")
+                        i.fa.fa-font
+                        select 
+                            option(value="Arial") Arial
+                            option(value="Comic Sans MS") Comic Sans MS
+                            option(value="Courier") Courier
+                            option(value="Timer New Roman") Times New Roman
+                    button(type="button", onclick="executeCommand('')")
+                        i.fa.fa-text-height
+                        input(type="range")
+                    label Font Color  
+                        input(type="color")
+                    label Background  
+                        input(type="color")
+
+
+                iframe.form-control#text-editor(name='editor')
             br
-            input.btn.btn-primary(type="submit", value="submit")
+            input.btn.btn-primary#submit-button(type="submit", value="submit")
