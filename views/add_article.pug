@@ -5,7 +5,7 @@ block content
     script(type='text/javascript', src="/js/editor.js")
     .container
         h1 #{title}
-        form(method="POST", action="/articles/add" onSubmit='doSubmit()')
+        form(method="POST", action="/articles/add" onsubmit='submitTextArea()')
             #form-group
                 label Title:
                 input.form-control(name='title', type=text)
@@ -81,6 +81,7 @@ block content
 
 
                 iframe.form-control#text-editor(name='editor')
+                    script(src='/js/editor-iframe.js')
                 textarea.hidden#textarea(name='body')
             br
             input.btn.btn-primary#submit-button(type="submit", value="submit")

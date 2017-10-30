@@ -16,7 +16,7 @@ router.get("/add", ensureAuthenticated, function (req, res) {
 router.post("/add", function (req, res) {
   // Data validation
   req.checkBody("title", "Title is required").notEmpty();
-  req.checkBody("editor", "Body is required").notEmpty();
+  req.checkBody("body", "Body is required").notEmpty();
   // Receive errors, if we have some during the validation
   var errors = req.validationErrors();
   if (errors) {
