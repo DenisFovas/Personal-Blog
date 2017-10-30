@@ -12,7 +12,7 @@ function executeCommandWithArguments (command, argument) {
 }
 
 function submitTextArea () {
-  let content = document.getElementById('text-editor').contentWindow
-  console.log(content)
-  $('#textarea').val(content)
+  let content = document.getElementById('text-editor').contentDocument
+  console.log(content.body.innerHTML)
+  $('#textarea').val(content.body.innerHTML)
 }
