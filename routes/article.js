@@ -58,8 +58,8 @@ router.post('/edit/:id', function (req, res) {
   // the redirection
   Article.update(query, article, function (err) {
     if (err) {
+      console.error('ERROR: Can\'t update article. ')
       console.log(err)
-      
     } else {
       res.redirect('/')
     }
@@ -69,11 +69,18 @@ router.post('/edit/:id', function (req, res) {
 // Load specific article (update) || Edit form
 router.get('/edit/:id', ensureAuthenticated, function (req, res) {
   Article.findById(req.params.id, function (err, article) {
-    if (article.author != req.user._id) {
+    if (err) {
+      console.log(err)
+    }
+    console.log(typeof article.author)
+    console.log(typeof req.user._id.toString())
+    if (article.author !== req.user._id.toString()) {
+      console.error('Warning: Not authorized person/bot/whatever tries to edit file')
       req.flash('danger', 'Not Authorized')
       res.redirect('/')
     } else {
       res.render('edit_article', {
+      // res.render('add_article', {
         title: 'Edit article',
         article: article
       })

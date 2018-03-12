@@ -14,71 +14,73 @@ block content
                 label Content:
                 br
                 div.editor-bar.panel
-                    button(type="button", onclick="executeCommand('bold')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('bold')")
                         i.fa.fa-bold
-                    button(type="button", onclick="executeCommand('italic')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('italic')")
                         i.fa.fa-italic
-                    button(type="button", onclick="executeCommand('underline')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('underline')")
                         i.fa.fa-underline
-                    button(type="button", onclick="executeCommand('strikeThrough')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('strikeThrough')")
                         i.fa.fa-strikethrough
-                    button(type="button", onclick="executeCommand('justifyLeft')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('justifyLeft')")
                         i.fa.fa-align-left
-                    button(type="button", onclick="executeCommand('justifyCenter')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('justifyCenter')")
                         i.fa.fa-align-center
-                    button(type="button", onclick="executeCommand('justifyRight')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('justifyRight')")
                         i.fa.fa-align-right
-                    button(type="button", onclick="executeCommand('justifyFull')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('justifyFull')")
                         i.fa.fa-align-justify
-                    button(type="button", onclick="executeCommand('indent')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('indent')")
                         i.fa.fa-indent
-                    button(type="button", onclick="executeCommand('outdent')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('outdent')")
                         i.fa.fa-dedent
-                    button(type="button", onclick="executeCommand('bold')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('createLink')")
                         i.fa.fa-link
-                    button(type="button", onclick="executeCommand('subscript')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('subscript')")
                         i.fa.fa-subscript
-                    button(type="button", onclick="executeCommand('superscript')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('superscript')")
                         i.fa.fa-superscript
-                    button(type="button", onclick="executeCommand('insertUnorderedList')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('insertUnorderedList')")
                         i.fa.fa-list-ul
-                    button(type="button", onclick="executeCommand('insertOrdoredList')")
+                    div.btn.button-editor(type="button", onclick="executeCommand('insertOrdoredList')")
                         i.fa.fa-list-ol
                     //- Continue with the image adding.
-                    button(type="button", onclick="executeCommand('bold')")
+                    //- Maybe add a Node plugin for image processing? 
+                    //- Can mongoDB support images? Or use an external site?
+                    div.btn.button-editor(type="button", onclick="executeCommand('insertImage')")
                         i.fa.fa-file-picture-o
-                    button(type="button", onclick="executeCommand('')")
+                    div.btn.button-editor(type="button")
                         i.fa.fa-header
                         select(onclick="executeCommandWithArguments('formatBlock', this.value);")
-                            option(value='h1') 
+                            option(value='H1') 
                                 h1 Header 1
-                            option(value='h2') 
+                            option(value='H2') 
                                 h2 Header 2
-                            option(value='h3') 
+                            option(value='H3') 
                                 h3 Header 3
-                            option(value='h4') 
+                            option(value='H4') 
                                 h4 Header 4
-                            option(value='h5') 
+                            option(value='H5') 
                                 h5 Header 5
-                            option(value='h6') 
+                            option(value='H6') 
                                 h6 Header 6
-                    button(type="button", onclick="executeCommand('')")
-                        i.fa.fa-code
-                    button(type="button", onclick="executeCommand('')")
+                    div.btn.button-editor(type="button")
                         i.fa.fa-font
-                        select 
+                        select(onclick="executeCommandWithArguments('fontName', this.value)")
                             option(value="Arial") Arial
                             option(value="Comic Sans MS") Comic Sans MS
                             option(value="Courier") Courier
                             option(value="Timer New Roman") Times New Roman
-                    button(type="button", onclick="executeCommand('')")
+                    div.btn.button-editor(type="button")
                         i.fa.fa-text-height
-                        input(type="range")
-                    label Font Color  
-                        input(type="color")
-                    label Background  
-                        input(type="color")
-
+                        - var size = 0;
+                        select(onclick='executeCommandWithArguments("fontSize", this.value)')
+                            while size < 10
+                                option(value=size)= size++
+                    div.btn.button-editor Font Color  
+                        input(type="color", onchange='console.log(this.value) || executeCommandWithArguments("foreColor", this.value)')
+                    div.btn.button-editor Background  
+                        input(type="color", onchange='console.log(this.value) || executeCommandWithArgument("hiliteColor", this.value)')
 
                 iframe.form-control#text-editor(name='editor')
                     script(src='/js/editor-iframe.js')

@@ -12,6 +12,12 @@ var config = require('./config/database')
 var app = express()
 var Article = require('./models/article')
 
+// Routes
+let aboutMe = require('./routes/about_me')
+let users = require('./routes/users')
+let article = require('./routes/article')
+let contact = require('./routes/contact')
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -19,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Set public folder
-app.use(express.static(path.join(__dirname + '/public')))
+app.use(express.static(path.join(__dirname, '/public')))
 
 // Connect to the data base
 mongoose.connect(config.database)
@@ -36,7 +42,7 @@ db.on('error', function (err) {
 })
 
 // Load view engine
-app.set('views', path.join(__dirname + '/views'))
+app.set('views', path.join(__dirname, '/views'))
 app.set('view engine', 'pug')
 
 // Express session middleware
@@ -98,11 +104,14 @@ app.get('/', function (req, res) {
 
 // Route files
 // Route for articles
-var article = require('./routes/article')
 app.use('/articles', article)
 // Route for users
-var users = require('./routes/users')
 app.use('/users', users)
+// Route for about_me part
+app.use('/about_me', aboutMe)
+// Route for the contact form
+app.use('/contact', contact)
+// TODO: Add the route for the games
 
 // Start server
 app.listen('3000', function () {

@@ -14,13 +14,16 @@ html
             .header.clearfix
                 nav
                     ul.nav.nav-pills.pull-right
+
                         li(role='presentation')
                             a(href='/') Home
+                        li(role='presentation')
+                            a(href='/about_me') About Me
                         if user
                             li(role='presentation')
                                 a(href='/articles/add') Add Article
                         li(role='presentation')
-                            a(href='#') Contact
+                            a(href='/contact') Contact
                         if user
                             li
                                 a(href='/users/logout') Log Out

@@ -18,6 +18,31 @@ html {
     justify-content: center;
 }
 
+.button-editor {
+    display: inline;
+    position: relative;
+    margin: 4px;
+    padding: 4px 2px;
+    background-color: #e5e5e5;
+    align-content: center;
+    border-radius: 10%;
+    width: 24px;
+    height: 24px;
+}
+
+.button-editor i {
+    display: inline;
+    position: relative;
+    align-content: center;
+    align-items: center;
+    padding: 4px;
+    margin: 4px 1px;
+}
+
+.button-editor:hover {
+    background-color: #878c8e;
+}
+
 #text-editor {
     height: 300px;;
 }
